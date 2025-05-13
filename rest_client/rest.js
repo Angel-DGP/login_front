@@ -1,12 +1,11 @@
-import { config } from "dotenv";
-config()
+import Constants from 'expo-constants';
 
-const url = process.env.API_URL;
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
 export const getAllUsers = async () => {
   console.log("getAllUsers");
   try {
-    const response = await fetch(url + "users");
+    const response = await fetch(API_URL + "users");
     if (!response.ok) {
       throw new Error("Error en la solicitud");
     }
@@ -20,7 +19,7 @@ export const getAllUsers = async () => {
 
 export const insertUser = async (name_user, password_user, email_user) => {
   try {
-    const response = await fetch(url + "postUser", {
+    const response = await fetch(API_URL + "postUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
