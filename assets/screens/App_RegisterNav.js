@@ -8,29 +8,32 @@ import {
   TextInput,
 } from "react-native";
 import { Button } from "react-native-web";
-import { insertUser } from "../../rest_client/rest";
+import { existingUser, insertUser } from "../../rest_client/rest";
 export const RegisterNav = ({ navigation, route }) => {
+  
   const handleRegister = async () => {
-    const result = await insertUser(name, password, email);
-    if (result) {
-      Alert.alert("Registro exitoso", `Usuario creado: ${result.name_user}`);
+    console.log(existingUser(email))
+    if (existingUser(email) === false) {
+      console.log("no existe usuario con este correo electronico")
+      const result = await insertUser(name, password, email);
+      if (result) {
+        Alert.alert("Registro exitoso", `Usuario creado: ${result.name_user}`);
+      } else {
+        Alert.alert("Error", "No se pudo registrar el usuario.");
+      }
     } else {
-      Alert.alert("Error", "No se pudo registrar el usuario.");
+      console.log("ya existe este usuario con ese correo electronico");
     }
   };
   const [name, onChangeName] = useState("");
   const [password, onChangePassword] = useState("");
   const [email, onChangeEmail] = useState("");
   const exists = async () => {
-    const users = await getAllUsers();
+    const users = await loginUser();
     console.log("Usuarios obtenidos:", users);
-    const matchedUser = users.find(
-      (user) => user.name_user === name && user.password_user === password && user.email_user === email
-    );
     if (matchedUser) {
       console.log("Datos no registrados");
     } else {
-      
       navigation.navigate("Login_Nav");
     }
   };

@@ -47,3 +47,25 @@ export const insertUser = async (name_user, password_user, email_user) => {
     return null;
   }
 };
+
+
+export const existingUser = async (email_user) => {
+  try {
+    const response = await fetch(API_URL + "existing", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email_user,
+      }),
+    });
+
+    const body = await response.json();
+    console.log("Respuesta de existingUser:", body);
+    return body;
+  } catch (error) {
+    console.error("Error al verificar usuario existente:", error);
+    return null;
+  }
+};
