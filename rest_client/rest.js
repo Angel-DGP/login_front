@@ -1,6 +1,4 @@
-const ip = "172.16.0.26";
-const port = 3001;
-const url = `http://${ip}:${port}/`;
+const url = `https://login-back-ixl9.onrender.com/`;
 
 export const getAllUsers = async () => {
   console.log("getAllUsers");
