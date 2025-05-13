@@ -1,17 +1,26 @@
-const API_URL = process.env.EXPO_PUBLIC_API_URL;
-
-export const getAllUsers = async () => {
-  console.log("getUserById");
+//const API_URL = process.env.EXPO_PUBLIC_API_URL;
+const API_URL = 'http://localhost:3001/'
+export const loginUser = async (name_user, password_user) => {
   try {
-    const response = await fetch(API_URL + "getUserById");
-    if (!response.ok) {
-      throw new Error("Error en la solicitud");
-    }
-    const body = await response.json();
+    const response = await fetch(`${API_URL}getUserById`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name_user,
+        password_user,
+      }),
+    });
+
+    const text = await response.text();
+    console.log("Texto del servidor:", text);
+
+    const body = JSON.parse(text);
     return body;
   } catch (error) {
-    console.error("Error al obtener usuario:", error);
-    return [];
+    console.error("Error al hacer login:", error);
+    return null;
   }
 };
 
