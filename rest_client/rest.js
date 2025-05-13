@@ -1,18 +1,16 @@
-import Constants from 'expo-constants';
-
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
 export const getAllUsers = async () => {
-  console.log("getAllUsers");
+  console.log("getUserById");
   try {
-    const response = await fetch(API_URL + "users");
+    const response = await fetch(API_URL + "getUserById");
     if (!response.ok) {
       throw new Error("Error en la solicitud");
     }
     const body = await response.json();
     return body;
   } catch (error) {
-    console.error("Error al obtener usuarios:", error);
+    console.error("Error al obtener usuario:", error);
     return [];
   }
 };
