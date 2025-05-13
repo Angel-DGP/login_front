@@ -1,4 +1,7 @@
-const url = `https://login-back-ixl9.onrender.com/`;
+import { config } from "dotenv";
+config()
+
+const url = process.env.API_URL;
 
 export const getAllUsers = async () => {
   console.log("getAllUsers");
