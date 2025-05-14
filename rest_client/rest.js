@@ -14,8 +14,6 @@ export const loginUser = async (name_user, password_user) => {
     });
 
     const text = await response.text();
-    console.log("Texto del servidor:", text);
-
     const body = JSON.parse(text);
     return body;
   } catch (error) {
