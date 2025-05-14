@@ -4,7 +4,7 @@ export const HomeNav = ({ navigation, route }) => {
   return (
     <View>
       <Text>Home screen</Text>
-      <Button title="Regresar" onPress={()=>{navigation.goBack()}}/>
+      <Button title="Regresar" onPress={()=>{navigation.replace('Login_Nav')}}/>
     </View>
   );
 };

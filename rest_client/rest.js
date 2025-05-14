@@ -1,5 +1,5 @@
-//const API_URL = process.env.EXPO_PUBLIC_API_URL;
-const API_URL = 'http://localhost:3001/'
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+//const API_URL = 'http://localhost:3001/'
 export const loginUser = async (name_user, password_user) => {
   try {
     const response = await fetch(`${API_URL}getUserById`, {
@@ -49,7 +49,7 @@ export const insertUser = async (name_user, password_user, email_user) => {
 };
 
 
-export const existingUser = async (email_user) => {
+export const existingUser = async (email_user, name_user) => {
   try {
     const response = await fetch(API_URL + "existing", {
       method: "POST",
@@ -57,13 +57,13 @@ export const existingUser = async (email_user) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email_user,
+        email_user : email_user,
+        name_user : name_user,
       }),
     });
 
     const body = await response.json();
-    console.log("Respuesta de existingUser:", body);
-    return body;
+    return body
   } catch (error) {
     console.error("Error al verificar usuario existente:", error);
     return null;

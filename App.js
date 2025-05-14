@@ -4,14 +4,26 @@ import { HomeNav } from "./assets/screens/App_HomeNav";
 import { LoginNav } from "./assets/screens/App_LoginNav";
 import { RegisterNav } from "./assets/screens/App_RegisterNav";
 export default function App() { 
-  const StackLaptops = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator();
   return (
-    <NavigationContainer>
-      <StackLaptops.Navigator initialRouteName="Login_Nav">
-        <StackLaptops.Screen component={HomeNav} name="Home_Nav" />
-        <StackLaptops.Screen component={LoginNav} name="Login_Nav" />
-        <StackLaptops.Screen component={RegisterNav} name="Register_Nav" />
-      </StackLaptops.Navigator>
+    <NavigationContainer >
+      <Stack.Navigator initialRouteName="Login_Nav">
+        <Stack.Screen component={HomeNav} name="Home_Nav" options={{
+          headerBackVisible : false,
+          title: 'Inicio',
+          headerTitleAlign: 'center'
+        }}/>
+        <Stack.Screen component={LoginNav} name="Login_Nav" options={{
+          headerBackVisible : false,
+          title: 'Iniciar Sesión',
+          headerTitleAlign: 'center'
+        }}/>
+        <Stack.Screen component={RegisterNav} name="Register_Nav" options={{
+          headerBackVisible : false,
+          title: 'Crear cuenta nueva',
+          headerTitleAlign: 'center'
+        }}/>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

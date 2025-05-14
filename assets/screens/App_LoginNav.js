@@ -11,7 +11,7 @@ export const LoginNav = ({ navigation, route }) => {
 
   if (user && user.name_user) {
     console.log("Login exitoso:", user);
-    navigation.navigate("Home_Nav");
+    navigation.replace("Home_Nav");
   } else {
     console.log("Datos no registrados");
     console.log(name);
@@ -21,8 +21,7 @@ export const LoginNav = ({ navigation, route }) => {
 
 
   return (
-    <View>
-      <Text>Login screen</Text>
+    <View style={styles.container}> 
       <TextInput
         style={styles.input}
         onChangeText={onChangeName}
@@ -37,7 +36,7 @@ export const LoginNav = ({ navigation, route }) => {
         secureTextEntry
       />
       <Button title="Ingresar" onPress={()=>{onLoginPress()}} />
-      <Button title="No posees cuenta?" onPress={()=>{navigation.navigate('Register_Nav')}} />
+      <Button title="No posees cuenta?" onPress={()=>{navigation.replace('Register_Nav')}} />
     </View>
   );
 };
@@ -49,4 +48,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  container: {
+    backgroundColor: "white", 
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  containerLogin: {
+    backgroundColor: 'black'
+  }
 });

@@ -10,14 +10,13 @@ import {
 import { Button } from "react-native-web";
 import { existingUser, insertUser } from "../../rest_client/rest";
 export const RegisterNav = ({ navigation, route }) => {
-  
   const handleRegister = async () => {
-    console.log(existingUser(email))
-    if (existingUser(email) === false) {
-      console.log("no existe usuario con este correo electronico")
+    const response = await existingUser(email, name);
+    if (response.exists == false) {
       const result = await insertUser(name, password, email);
       if (result) {
         Alert.alert("Registro exitoso", `Usuario creado: ${result.name_user}`);
+        navigation.replace("Login_Nav");
       } else {
         Alert.alert("Error", "No se pudo registrar el usuario.");
       }
@@ -28,15 +27,6 @@ export const RegisterNav = ({ navigation, route }) => {
   const [name, onChangeName] = useState("");
   const [password, onChangePassword] = useState("");
   const [email, onChangeEmail] = useState("");
-  const exists = async () => {
-    const users = await loginUser();
-    console.log("Usuarios obtenidos:", users);
-    if (matchedUser) {
-      console.log("Datos no registrados");
-    } else {
-      navigation.navigate("Login_Nav");
-    }
-  };
   return (
     <View>
       <Text>Register screen</Text>
@@ -58,6 +48,12 @@ export const RegisterNav = ({ navigation, route }) => {
         onChangeText={onChangeEmail}
         value={email}
         placeholder="Ingrese su correo electronico"
+      />
+      <Button
+        title="Iniciar Sesión"
+        onPress={() => {
+          navigation.replace("Login_Nav");
+        }}
       />
       <Button title="Registrarse" onPress={handleRegister} />
     </View>
