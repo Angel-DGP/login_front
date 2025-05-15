@@ -1,4 +1,3 @@
-import { View, StyleSheet } from "react-native";
 import { useState } from "react";
 import { loginUser } from "../../rest_client/rest";
 import {
@@ -35,27 +34,44 @@ export const LoginNav = ({ navigation }) => {
     }
   };
   return (
-    <CContainer >
+    <CContainer
+      style={{
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop:40
+      }}
+    >
       <CCol className="align-items-center">
-        <CRow>
-          <CFormInput
-            type="text"
-            placeholder="User"
-            value={name}
-            onChange={(e) => onChangeName(e.target.value)}
-            label="Ingrese su usuario"
-          />
-          <CFormInput
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => onChangePassword(e.target.value)}
-            label="Ingrese su contraseña"
-          />
-        </CRow>
-        <CRow className="align-items-center">
-          <CFormLabel>{errorLabel}</CFormLabel>
-          <CButton onClick={onLoginPress} color="primary" className="rounded-pill">
+        <CFormInput
+          type="text"
+          placeholder="User"
+          value={name}
+          onChange={(e) => onChangeName(e.target.value)}
+          label="Ingrese su usuario"
+        />
+        <CFormInput
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => onChangePassword(e.target.value)}
+          label="Ingrese su contraseña"
+        />
+        <CRow
+          className="align-items-center"
+          style={{ paddingRight: 20, paddingLeft: 20,paddingTop:20 }}
+        >
+          <CFormLabel
+            style={{
+              color: "red",
+            }}
+          >
+            {errorLabel}
+          </CFormLabel>
+          <CButton
+            onClick={onLoginPress}
+            color="primary"
+            className="rounded-pill"
+          >
             Ingresar
           </CButton>
           <CButton

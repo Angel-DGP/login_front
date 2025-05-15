@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Alert,
-  TextInput,
-} from "react-native";
-import { Button } from "react-native-web";
+  CCol,
+  CContainer,
+  CFormInput,
+  CFormLabel,
+  CRow,
+  CButton,
+} from "@coreui/react";
+import "@coreui/coreui/dist/css/coreui.min.css";
 import { existingUser, insertUser } from "../../rest_client/rest";
 export const RegisterNav = ({ navigation, route }) => {
   const handleRegister = async () => {
@@ -28,42 +28,55 @@ export const RegisterNav = ({ navigation, route }) => {
   const [password, onChangePassword] = useState("");
   const [email, onChangeEmail] = useState("");
   return (
-    <View>
-      <Text>Register screen</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeName}
-        value={name}
-        placeholder="Ingrese su usuario"
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangePassword}
-        value={password}
-        placeholder="Ingrese su contraseña"
-        secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeEmail}
-        value={email}
-        placeholder="Ingrese su correo electronico"
-      />
-      <Button
-        title="Iniciar Sesión"
-        onPress={() => {
-          navigation.replace("Login_Nav");
-        }}
-      />
-      <Button title="Registrarse" onPress={handleRegister} />
-    </View>
+    <CContainer
+      style={{
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop:40
+      }}
+    >
+      <CCol className="align-items-center">
+        <CFormInput
+          onChange={(e) => onChangeName(e.target.value)}
+          value={name}
+          label="Ingrese su usuario"
+          placeholder="User"
+        />
+
+        <CFormInput
+          onChange={(e) => onChangePassword(e.target.value)}
+          value={password}
+          label="Ingrese su contraseña"
+          type="password"
+          placeholder="Password"
+        />
+        <CFormInput
+          onChange={(e) => onChangeEmail(e.target.value)}
+          value={email}
+          label="Ingrese su correo electronico"
+          placeholder="Email"
+        />
+        <CRow style={{ paddingRight: 20, paddingLeft: 20, paddingTop: 20 }}>
+          {" "}
+          <CButton
+            onClick={handleRegister}
+            color="primary"
+            className="rounded-pill"
+          >
+            {" "}
+            Registrarse
+          </CButton>
+          <CButton
+            title="Iniciar Sesión"
+            onClick={() => {
+              navigation.replace("Login_Nav");
+            }}
+            color="link"
+          >
+            ¿Posees cuenta? Ingresa aquí
+          </CButton>
+        </CRow>
+      </CCol>
+    </CContainer>
   );
 };
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
